@@ -22,7 +22,7 @@ jobs:
           # Type of the issue to be created. Example: 'Incident'
           issuetype: Bug
           # Issue summary
-          summary: summary test
+          summary: ${{github.event.issue.title}}
           # Issue description
           description: description test
 
