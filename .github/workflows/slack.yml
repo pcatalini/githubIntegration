@@ -1,0 +1,19 @@
+
+name: slack
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  slackNotification:
+    name: Slack Notification
+    runs-on: ubuntu-latest
+    steps:
+      - name: slack-send
+        uses: slackapi/slack-github-action@v1.15.0
+        with:
+          channel-id: C02DGE4CBFY
+          slack-message: Slack message test, an PR was opened! # optional
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
