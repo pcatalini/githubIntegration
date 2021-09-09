@@ -1,4 +1,4 @@
-name: CI
+name: slack
 
 # Controls when the workflow will run
 on:
@@ -12,5 +12,7 @@ jobs:
       - name: slack-send
         uses: slackapi/slack-github-action@v1.15.0
         with:
-          channel-id: C02DGE4CBF
+          channel-id: C02DGE4CBFY
           slack-message: Slack message test, an PR was opened! # optional
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
