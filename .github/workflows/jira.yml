@@ -18,7 +18,7 @@ jobs:
         uses: atlassian/gajira-create@v2.0.1
         with:
           # Key of the project
-          project: git
+          project: GIT
           # Type of the issue to be created. Example: 'Incident'
           issuetype: Bug
           # Issue summary
