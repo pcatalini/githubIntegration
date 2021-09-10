@@ -13,8 +13,8 @@ jobs:
       - name: slack-send
         uses: slackapi/slack-github-action@v1.15.0
         with:
-          #channel-id: C02DGE4CBFY
-          # slack-message: Pull Request ${{github.head_ref}} was ${{github.base_ref}}
+          channel-id: C02DGE4CBFY
+          slack-message: Pull Request ${{github.head_ref}} was ${{github.base_ref}}
           payload: '{\"channel-id\":\"C02DGE4CBFY\",\"blocks\":[{\"type\":\"header\",\"text\":{\"type\":\"plain_text\",\"text\":\"Pull request event\",\"emoji\":true}},{\"type\":\"section\",\"fields\":[{\"type\":\"mrkdwn\",\"text\":\"*Type:*\n New Pull Request\"},{\"type\":\"mrkdwn\",\"text\":\"*Created by:*\n pcatalini\"}]},{\"type\":\"section\",\"fields\":[{\"type\":\"mrkdwn\",\"text\":\"*From branch:*\n feature\"},{\"type\":\"mrkdwn\",\"text\":\"*To branch:*\n master\"}]},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"<https://example.com|View Pull Request>\"}}]}'
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
