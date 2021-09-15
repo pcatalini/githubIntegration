@@ -10,6 +10,23 @@ jobs:
     name: Slack Notification
     runs-on: ubuntu-latest
     steps:
+      - name: Jira Login
+        uses: atlassian/gajira-login@v2.0.0
+        env:
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+      - name: Jira Create issue
+        uses: atlassian/gajira-create@v2.0.1
+        with:
+          # Key of the project
+          project: GIT
+          # Type of the issue to be created. Example: 'Incident'
+          issuetype: Task
+          # Issue summary
+          summary: ${{github.event.pull_request.title}}
+          # Issue description
+          description: ${{github.event.pull_request.body}} see more ${{github.event.pull_request.html_url}}
       - name: slack-send
         uses: slackapi/slack-github-action@v1.15.0
         with:
@@ -17,3 +34,4 @@ jobs:
           slack-message: 'New Pull request ${{github.event.pull_request.html_url}} From Branch ${{github.head_ref}} To ${{github.base_ref}}' 
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
+          
