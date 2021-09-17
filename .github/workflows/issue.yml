@@ -25,4 +25,11 @@ jobs:
           summary: ${{github.event.issue.title}}
           # Issue description
           description: ${{github.event.issue.body}} see more ${{github.event.issue.html_url}}
+      - name: slack-send
+        uses: slackapi/slack-github-action@v1.15.0
+        with:
+          channel-id: C02DGE4CBFY
+          slack-message: 'New Github issue see more ${{secrets.JIRA_BASE_URL}}/browse/${{steps.jira_ticket.outputs.issue}}' 
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
 
