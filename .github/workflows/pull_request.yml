@@ -45,7 +45,7 @@ jobs:
         if: ${{!steps.jira_founded_ticket.outputs.issue}}
         uses: slackapi/slack-github-action@v1.15.0
         with:
-          channel-id: ${{SLACK_CHANNEL_ID}}
+          channel-id: ${{secrets.SLACK_CHANNEL_ID}}
           slack-message: 'New Pull request see more ${{secrets.JIRA_BASE_URL}}/browse/${{steps.jira_ticket.outputs.issue}}' 
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
@@ -54,7 +54,7 @@ jobs:
         if: ${{steps.jira_founded_ticket.outputs.issue}}
         uses: slackapi/slack-github-action@v1.15.0
         with:
-          channel-id: ${{SLACK_CHANNEL_ID}}
+          channel-id: ${{secrets.SLACK_CHANNEL_ID}}
           slack-message: 'New Pull request see more ${{secrets.JIRA_BASE_URL}}/browse/${{steps.jira_founded_ticket.outputs.issue}}' 
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
