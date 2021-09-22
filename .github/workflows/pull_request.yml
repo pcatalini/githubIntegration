@@ -16,17 +16,13 @@ jobs:
           JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
           JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
           JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-          
       #try to find jira key
       - name: Find in commit messages
         id: jira_founded_ticket
         uses: atlassian/gajira-find-issue-key@master
         continue-on-error: true
         with:
-          string: ${{ github.event.pull_request.title }}
-      
-      
-      
+          string: ${{ github.event.pull_request.title }}     
       - name: Jira Create issue
         id: jira_ticket
         if: ${{!steps.jira_founded_ticket.outputs.issue}}
@@ -39,8 +35,7 @@ jobs:
           # Issue summary
           summary: ${{github.event.pull_request.title}}
           # Issue description
-          description: ${{github.event.pull_request.body}} see more ${{github.event.pull_request.html_url}}
-          
+          description: ${{github.event.pull_request.body}} see more ${{github.event.pull_request.html_url}}     
       - name: slack-send
         if: ${{!steps.jira_founded_ticket.outputs.issue}}
         uses: slackapi/slack-github-action@v1.15.0
@@ -49,7 +44,6 @@ jobs:
           slack-message: 'New Pull request see more ${{secrets.JIRA_BASE_URL}}/browse/${{steps.jira_ticket.outputs.issue}}' 
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
-          
       - name: slack-send
         if: ${{steps.jira_founded_ticket.outputs.issue}}
         uses: slackapi/slack-github-action@v1.15.0
