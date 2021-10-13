@@ -10,14 +10,14 @@ jobs:
       - name: Jira Login
         uses: atlassian/gajira-login@v2.0.0
         env:
-          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL}}
-          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL}}
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN}}
+          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL_2}}
+          JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL_2}}
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN_2}}
       - name: Jira Create issue
         id: jira_ticket
         uses: atlassian/gajira-create@v2.0.1
         with:
-          project: ${{secrets.JIRA_PROJECT_KEY}}
+          project: ${{secrets.JIRA_PROJECT_KEY_2}}
           issuetype: Bug
           summary: '[ns1-terraform] ${{github.event.issue.title}}'
           description: ${{github.event.issue.body}} see more at ${{github.event.issue.html_url}}
