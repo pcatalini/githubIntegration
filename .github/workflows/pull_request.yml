@@ -55,7 +55,7 @@
 name: pr_notify
 on:
   pull_request:
-    branches: [master]
+    branches: [main]
 jobs:
   jira_job:
     runs-on: ubuntu-latest
